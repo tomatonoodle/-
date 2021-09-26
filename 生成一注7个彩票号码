@@ -1,0 +1,41 @@
+<!--index.wxml-->//设置页面各要素
+<view class="box">
+<view class="title">生成彩票数</view>
+<view class="a">7位彩票数数列:</view>
+<view wx:for="{{rand}}">{{item}}</view>
+<button type="primary" bindtap="newRand">产生彩票数列</button>
+</view>
+
+/**index.wxss**/
+.title{                // 设置title样式
+  font-size: large;
+  color: red;
+  text-align: center;
+}
+.a{               //设置“7位彩票数数列:”字样与上下文行距
+  margin: 10px;
+}
+
+// index.js
+// 获取应用实例
+var rand,sum;
+function createRand(){
+  rand=[];
+  for(var i=0;i<7;i++){
+    var r=(Math.random()*32).toFixed(0)*1;//随机输出32以内整数
+     rand[i]=r;
+     for (var j=0;j<i;j++){//判断是否有重复数值
+      if (rand[j]==r){i=i-1;}
+    }  
+    console.log(rand[i]);
+  }
+};
+Page({
+
+newRand:function(){
+  createRand();
+  this.setData({ /返回数值
+    rand:rand
+  })
+}
+})
