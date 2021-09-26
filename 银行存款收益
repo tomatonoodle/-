@@ -1,0 +1,47 @@
+<!--index.wxml-->//添加页面元素
+<view class='box'>
+<view class='title'>利用循环语句求和</view>
+  <view>
+  <input placeholder="请输入本金" type="number" bindblur="startnum"></input>
+  <input placeholder="请输入利率" type="number" bindblur="endnum"></input>
+  </view>
+<view class="h">五年后本息总和：{{sum}}</view>
+<button type="primary" bindtap="calc">求和</button>
+</view>
+
+/**index.wxss**/ //进行页面布局，设置大小
+.title{
+  font-size: 25px;//title字样为25ox
+  text-align: center;//位置居中
+  color: blueviolet;//设置字体颜色
+}
+.h{
+  font-size: large;
+  margin:20px 0;
+}
+input{                //对输入框设置
+  border-bottom: 1px solid black;
+  margin-top: 10px;
+}
+
+
+// index.js
+// 获取应用实例
+var start,end,sum;
+Page({
+  startnum:function(e){
+    start=parseFloat(e.detail.value);//satrt数值为浮点型
+    },
+  endnum:function(e){
+   end=parseFloat(e.detail.value);
+ },
+ calc:function(){
+   sum=start;
+   for(var i=0;i<=4;i++){//for函数计算五年的本息，进行五次循环
+     sum=sum*(1+end)
+   }
+   this.setData({
+     sum:sum//返回sum值，在页面中显示
+   })
+ }
+})
